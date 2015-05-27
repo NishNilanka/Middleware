@@ -22,6 +22,7 @@ public class ClientOne {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         try {
             Socket clientSocket = new Socket("127.0.1", 3074);
             System.err.println("Clien was connected to the server ");
