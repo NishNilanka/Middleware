@@ -11,6 +11,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
+/*import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import com.google.gson.Gson;*/
 
 /**
  *
@@ -21,8 +25,8 @@ public class ClientOne {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
+    public void  client(Student std ) {
+       
         try {
             Socket clientSocket = new Socket("127.0.1", 3074);
             System.err.println("Clien was connected to the server ");
@@ -31,11 +35,20 @@ public class ClientOne {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             //Scanner to read the data from keyboard
             Scanner x = new Scanner(System.in);
+            Student stdN=new Student();
+            /*Gson gson=new Gson();
+            String json =gson.toJson(stdN);
+            out.print(json);
+            System.out.println(json);*/
+            //Scanner x = new Scanner(System.in);
             while (true) {
-                System.out.print("Enter Your Message :");
+                System.out.println("Enter Your Message :");
                 String s = x.nextLine();
+               
+                
                 //Send the message
                 out.println(s);
+                
                 if (s.equals("bye")) {
                     break;
                 }
@@ -44,15 +57,17 @@ public class ClientOne {
                 //Print it on the terminal
                 System.out.println("Sever: " + s);
             }
+            
+           
             // Now terminate the client connection.
             System.err.println("Terminating the client connection.");
             out.close();
             in.close();
             clientSocket.close();
         } catch (UnknownHostException ex) {
-             System.err.println("fuck");
-        } catch (IOException ex) {
              System.err.println("Server Not Reachable");
+        } catch (IOException ex) {
+             JOptionPane.showConfirmDialog(this, "Server Not Reachable");
         }
     }
 }
