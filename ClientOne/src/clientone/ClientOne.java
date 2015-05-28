@@ -28,7 +28,7 @@ public class ClientOne {
     public void  client(Student std ) {
        
         try {
-            Socket clientSocket = new Socket("127.0.1", 3074);
+            Socket clientSocket = new Socket("127.0.0.1", 3074);
             System.err.println("Clien was connected to the server ");
             // Creating input and putput stream to read and write
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -67,7 +67,7 @@ public class ClientOne {
         } catch (UnknownHostException ex) {
              System.err.println("Server Not Reachable");
         } catch (IOException ex) {
-             JOptionPane.showConfirmDialog(this, "Server Not Reachable");
+             JOptionPane.showMessageDialog(null, "Server Not Reachable");
         }
     }
 }

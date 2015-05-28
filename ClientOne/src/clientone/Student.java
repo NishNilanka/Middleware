@@ -4,18 +4,16 @@
  */
 package clientone;
 
-import static clientone.StudentDetailsJFrame.writetofile;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.Serializable;
 
 /**
  *
  * @author GWSC GINTOTA
  */
-public class Student {
+public class Student implements Serializable {
     private String stdNam;
     private String indexNum;
     private float scs_01;

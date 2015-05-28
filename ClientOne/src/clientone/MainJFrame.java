@@ -15,6 +15,7 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     public MainJFrame() {
         initComponents();
+        public int i = 0;
     }
 
     /**

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class MainClass {
     
     
-        ClientOne client = new ClientOne();
+     ClientOne client = new ClientOne();
         
 
 

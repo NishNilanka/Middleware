@@ -5,10 +5,7 @@
 package clientone;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -226,6 +223,7 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
 
     private void submitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbtnActionPerformed
           Student std=new Student();
+          
          try{
           std.setStdNam(txtName.getText());
           std.setIndexNum(txtIndexNum.getText());
@@ -235,26 +233,43 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
           std.setScs_04(Float.parseFloat(txtScs1104.getText()));
           std.setScs_05(Float.parseFloat(txtScs1105.getText()));
           std.setScs_06(Float.parseFloat(txtScs1106.getText()));
-              try {
-                  //System.out.println("Student std:::::::::::::"+std);
-                  writetofile(std);
-              } catch (IOException ex) {
-                  Logger.getLogger(StudentDetailsJFrame.class.getName()).log(Level.SEVERE, null, ex);
-              }
+          
+           
+         FileOutputStream fileOut =new FileOutputStream("MarshalledObjects/student.obj");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(std);
+         out.close();
+         fileOut.close();
+         
+         
+         
+      this.dispose();
+//              try {
+//                  //System.out.println("Student std:::::::::::::"+std);
+//                  writetofile(std);
+//              } catch (IOException ex) {
+//                  Logger.getLogger(StudentDetailsJFrame.class.getName()).log(Level.SEVERE, null, ex);
+//              }
           ClientOne clntOne =new ClientOne();
           clntOne.client(std);
-          this.dispose();
+          
           }
           catch(NumberFormatException e){
               JOptionPane.showMessageDialog(this, "Student details are not valid");
               
           }
+         catch(Exception i)
+      {
+          System.out.println(i);
+          JOptionPane.showMessageDialog(this, "Marshalling Fails !");
+          
+      }
     }//GEN-LAST:event_submitbtnActionPerformed
 
-   public static void writetofile(Student obj)throws IOException{
-        ObjectOutputStream objectoutputstream=new ObjectOutputStream(new FileOutputStream("details.bin"));
-        objectoutputstream.writeObject(obj);
-    }
+//   public static void writetofile(Student obj)throws IOException{
+//        ObjectOutputStream objectoutputstream=new ObjectOutputStream(new FileOutputStream("details.bin"));
+//        objectoutputstream.writeObject(obj);
+//    }
     /**
      * @param args the command line arguments
      */
