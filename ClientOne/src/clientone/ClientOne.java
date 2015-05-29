@@ -16,8 +16,8 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
 /*import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import com.google.gson.Gson;*/
+ import org.json.simple.JSONObject;
+ import com.google.gson.Gson;*/
 
 /**
  *
@@ -30,33 +30,35 @@ public class ClientOne {
     private Student newStudent;
     private boolean isConnected;
     private Socket socket;
-    
-    public void  client(Student std ) {
-        
-            
-       
+    private ObjectInputStream inStream;
+
+    public void client(Student std) {
+
+
+
         try {
             Socket clientSocket = new Socket("127.0.0.1", 3074);
-            
+
             System.err.println("Clien was connected to the server ");
-            
+
             outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-            
+
             // Creating input and putput stream to read and write
             //Scanner to read the data from keyboard
             InputStream inFromServer = clientSocket.getInputStream();
-            DataInputStream in =new DataInputStream(inFromServer);
-            System.out.println("Serer said"+in.readUTF());
+            DataInputStream in = new DataInputStream(inFromServer);
+            System.out.println("Serer said" + in.readUTF());
             System.err.println("Terminating the client connection.");
 
             clientSocket.close();
         } catch (UnknownHostException ex) {
-             System.err.println("Server Not Reachable");
+            System.err.println("Server Not Reachable");
         } catch (IOException ex) {
-             JOptionPane.showMessageDialog(null, "Server Not Reachable");
+            JOptionPane.showMessageDialog(null, "Server Not Reachable");
         }
     }
-       /**
+
+    /**
      * @return the newStudent
      */
     public Student getNewStudent() {
@@ -66,14 +68,14 @@ public class ClientOne {
     /**
      * @param newStudent the newStudent to set
      */
-    public void setNewStudent(Student newStudent) {
+    public void setNewStudent(Student newStudent) throws ClassNotFoundException {
         this.newStudent = newStudent;
         AddStudent(newStudent);
     }
-    
-    public void AddStudent(Student std)
-    {
-         while (!isConnected) {
+
+    public void AddStudent(Student std) throws ClassNotFoundException {
+        double gpa;
+        while (!isConnected) {
             try {
                 socket = new Socket("localHost", 3074);
                 System.out.println("Connected");
@@ -81,12 +83,15 @@ public class ClientOne {
                 outputStream = new ObjectOutputStream(socket.getOutputStream());
                 System.out.println("Object to be written = " + std);
                 outputStream.writeObject(std);
-                
-                
+
+                inStream = new ObjectInputStream(socket.getInputStream());
+                gpa = (Double) inStream.readObject();
+                JOptionPane.showMessageDialog(null, "Student GPA is "+gpa, "Reply from Server - GPA", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Object received(GPA) = " + gpa);
                 /*InputStream inFromServer = socket.getInputStream();
-                DataInputStream in =new DataInputStream(inFromServer);
-                System.out.println("Serer said"+in.readUTF());
-                System.err.println("Terminating the client connection.");*/
+                 DataInputStream in =new DataInputStream(inFromServer);
+                 System.out.println("Serer said"+in.readUTF());
+                 System.err.println("Terminating the client connection.");*/
 
             } catch (SocketException se) {
                 JOptionPane.showMessageDialog(null, "Erro !");
