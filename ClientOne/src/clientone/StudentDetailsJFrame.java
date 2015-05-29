@@ -4,7 +4,6 @@
  */
 package clientone;
 
-import java.awt.Toolkit;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JOptionPane;
@@ -58,12 +57,6 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Enter Name");
 
-        txtIndexNum.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtIndexNumKeyTyped(evt);
-            }
-        });
-
         jLabel2.setText("Index Number");
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
@@ -71,21 +64,10 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
                 txtNameActionPerformed(evt);
             }
         });
-        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNameKeyTyped(evt);
-            }
-        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
 
         jLabel3.setText("SCS 1101");
-
-        txtScs1101.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtScs1101KeyTyped(evt);
-            }
-        });
 
         jLabel4.setText("SCS 1102");
 
@@ -253,11 +235,8 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
           std.setScs_06(Float.parseFloat(txtScs1106.getText()));
           
            
-         FileOutputStream fileOut =new FileOutputStream("MarshalledObjects/student.obj");
-         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-         out.writeObject(std);
-         out.close();
-         fileOut.close();
+         ClientOne c = new ClientOne();
+         c.setNewStudent(std);
          
          
          
@@ -283,37 +262,6 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
           
       }
     }//GEN-LAST:event_submitbtnActionPerformed
-
-    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
-        // TODO add your handling code here:
-         char c=evt.getKeyChar();
-        String in = txtName.getText();
-        if(c!=' '){
-        if(!Character.isLetter(c)|| Character.isDigit(c)){
-           evt.consume();
-           Toolkit tk = Toolkit.getDefaultToolkit();
-             tk.beep();}}
-    }//GEN-LAST:event_txtNameKeyTyped
-
-    private void txtIndexNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIndexNumKeyTyped
-        // TODO add your handling code here:
-        char c=evt.getKeyChar();
-        String in =txtIndexNum.getText();
-        if(in.length()>9 ||!Character.isDigit(c)){
-        evt.consume();
-           Toolkit tk = Toolkit.getDefaultToolkit();
-             tk.beep();}
-    }//GEN-LAST:event_txtIndexNumKeyTyped
-
-    private void txtScs1101KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtScs1101KeyTyped
-        // TODO add your handling code here:
-//        char c=evt.getKeyChar();
-//        String in =txtScs1101.getText();
-//        if((c==)||!Character.isDigit(c)){
-//        evt.consume();
-//           Toolkit tk = Toolkit.getDefaultToolkit();
-//             tk.beep();}
-    }//GEN-LAST:event_txtScs1101KeyTyped
 
 //   public static void writetofile(Student obj)throws IOException{
 //        ObjectOutputStream objectoutputstream=new ObjectOutputStream(new FileOutputStream("details.bin"));
