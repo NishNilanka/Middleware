@@ -4,13 +4,15 @@
  */
 package Servers;
 
-import java.io.BufferedReader;
+import clientone.Student;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -19,48 +21,42 @@ import java.net.Socket;
 public class ServerOne extends Thread {
 
     int port = 3074;
+    private ObjectInputStream inStream;
+
     @Override
-    public void run()
-    {
-         try {
+    public void run() {
+        try {
             ServerSocket server = new ServerSocket(port);
-            System.err.println("Server One is listening to port : "+ port);
-            Socket accept = server.accept();
-            InetAddress InetAddress = accept.getInetAddress();
-            System.err.println(InetAddress + " get connected...");
-            BufferedReader bf = new BufferedReader(new InputStreamReader(accept.getInputStream()));
-            PrintWriter print = new PrintWriter(accept.getOutputStream(), true);
-            String Str;
+            System.err.println("Server One is listening to port : " + port);
             while (true) {
-
-                Str = bf.readLine();
-                System.out.println("Client - " + InetAddress + " : " + Str);
-
-                if (Str.equals("Bye")) {
-                    break;
-                }
-
-
-                print.println(Str);
+                Socket accept = server.accept();
+                communicate(accept);
+                
             }
-            System.err.println("Connection terminated");
-            print.close();
-            bf.close();
-            accept.close();
+            
 
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        
+
     }
-    
-    public double calGPA()
-    {
+
+    public double calGPA() {
         return 1.00;
     }
 
-   
-    
-    
-    
+    public void communicate(Socket accept) {
+        try {
+            InetAddress InetAddress = accept.getInetAddress();
+            System.err.println(InetAddress + " get connected...\n");
+            inStream = new ObjectInputStream(accept.getInputStream());
+            Student student = (Student) inStream.readObject();
+            System.out.println("Object received = " + student.getIndexNum());
+            accept.close();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        } catch (ClassNotFoundException ex) {
+            System.err.println(ex);
+        }
+    }
 }

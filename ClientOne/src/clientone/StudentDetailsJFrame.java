@@ -226,7 +226,7 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
           
          try{
           std.setStdNam(txtName.getText());
-          std.setIndexNum(txtIndexNum.getText());
+          std.setIndexNum(new Integer(txtIndexNum.getText()));
           std.setScs_01(Float.parseFloat(txtScs1101.getText()));
           std.setScs_02(Float.parseFloat(txtScs1102.getText()));
           std.setScs_03(Float.parseFloat(txtScs1103.getText()));
@@ -235,11 +235,8 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
           std.setScs_06(Float.parseFloat(txtScs1106.getText()));
           
            
-         FileOutputStream fileOut =new FileOutputStream("MarshalledObjects/student.obj");
-         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-         out.writeObject(std);
-         out.close();
-         fileOut.close();
+         ClientOne c = new ClientOne();
+         c.setNewStudent(std);
          
          
          

@@ -4,13 +4,12 @@
  */
 package clientone;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 /*import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,52 +21,65 @@ import com.google.gson.Gson;*/
  */
 public class ClientOne {
 
-    /**
-     * @param args the command line arguments
-     */
+    private ObjectInputStream inputStream = null;
+    private ObjectOutputStream outputStream = null;
+    private Student newStudent;
+    private boolean isConnected;
+    private Socket socket;
+    
     public void  client(Student std ) {
+        
+            
        
         try {
             Socket clientSocket = new Socket("127.0.0.1", 3074);
             System.err.println("Clien was connected to the server ");
-            // Creating input and putput stream to read and write
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-            //Scanner to read the data from keyboard
-            Scanner x = new Scanner(System.in);
-            Student stdN=new Student();
-            /*Gson gson=new Gson();
-            String json =gson.toJson(stdN);
-            out.print(json);
-            System.out.println(json);*/
-            //Scanner x = new Scanner(System.in);
-            while (true) {
-                System.out.println("Enter Your Message :");
-                String s = x.nextLine();
-               
-                
-                //Send the message
-                out.println(s);
-                
-                if (s.equals("bye")) {
-                    break;
-                }
-                //Read the echo from the server
-                s = in.readLine();
-                //Print it on the terminal
-                System.out.println("Sever: " + s);
-            }
             
-           
-            // Now terminate the client connection.
+            outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            // Creating input and putput stream to read and write
+            //Scanner to read the data from keyboard
+            
             System.err.println("Terminating the client connection.");
-            out.close();
-            in.close();
+
             clientSocket.close();
         } catch (UnknownHostException ex) {
              System.err.println("Server Not Reachable");
         } catch (IOException ex) {
              JOptionPane.showMessageDialog(null, "Server Not Reachable");
+        }
+    }
+       /**
+     * @return the newStudent
+     */
+    public Student getNewStudent() {
+        return newStudent;
+    }
+
+    /**
+     * @param newStudent the newStudent to set
+     */
+    public void setNewStudent(Student newStudent) {
+        this.newStudent = newStudent;
+        AddStudent(newStudent);
+    }
+    
+    public void AddStudent(Student std)
+    {
+         while (!isConnected) {
+            try {
+                socket = new Socket("localHost", 3074);
+                System.out.println("Connected");
+                isConnected = true;
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                System.out.println("Object to be written = " + std);
+                outputStream.writeObject(std);
+
+
+            } catch (SocketException se) {
+                JOptionPane.showMessageDialog(null, "Erro !");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Erro ! IOException");
+            }
         }
     }
 }

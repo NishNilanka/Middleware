@@ -4,9 +4,6 @@
  */
 package clientone;
 
-import java.io.IOException;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author GWSC GINTOTA
@@ -19,8 +16,11 @@ public class MainClass {
 
 
     public static void main(String arg[]){
-     MainJFrame MF=new MainJFrame();
-     MF.setVisible(true);
+    
+        MainJFrame MF=new MainJFrame();
+        MF.setVisible(true); 
+        //Student s = new Student();
+        
      
     }
        

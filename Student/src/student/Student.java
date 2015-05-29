@@ -2,7 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientone;
+package student;
+
+/**
+ *
+ * @author Nishan Gunawardena
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -169,3 +177,4 @@ public class Student implements Serializable {
         return "Id = " + getIndexNum();
     }
 }
+

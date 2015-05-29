@@ -2,10 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Broker;
+package Servers;
 
-
-import Servers.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,12 +16,10 @@ import java.net.Socket;
  *
  * @author Nishan Gunawardena
  */
-public class Broker extends Thread{
-    
-    
+public class MainServer extends Thread {
     public static void main(String arg[])
     {
-        Broker b = new Broker();
+        MainServer b = new MainServer();
         ServerOne sOne= new ServerOne();
         ServerTwo sTwo = new ServerTwo();
         
@@ -35,7 +31,6 @@ public class Broker extends Thread{
         sTwo.getRank();
         
     }
-    @Override
     public void run()
     {
          try {
@@ -66,7 +61,6 @@ public class Broker extends Thread{
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        
     }
     
 }

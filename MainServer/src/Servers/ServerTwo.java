@@ -7,6 +7,7 @@ package Servers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -17,6 +18,7 @@ import java.net.Socket;
  * @author Nishan Gunawardena
  */
 public class ServerTwo extends Thread {
+    private ObjectInputStream inStream = null;
     int port = 3075;
     @Override
     public void run()
@@ -25,6 +27,7 @@ public class ServerTwo extends Thread {
             ServerSocket server = new ServerSocket(port);
             System.err.println("Server Two is listening to port : "+ port);
             Socket accept = server.accept();
+            inStream = new ObjectInputStream(accept.getInputStream());
             InetAddress InetAddress = accept.getInetAddress();
             System.err.println(InetAddress + " get connected...");
             BufferedReader bf = new BufferedReader(new InputStreamReader(accept.getInputStream()));
