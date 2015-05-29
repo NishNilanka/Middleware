@@ -28,10 +28,10 @@ public class ServerOne extends Thread {
         try {
             ServerSocket server = new ServerSocket(port);
             System.err.println("Server One is listening to port : " + port);
-            while (true) {
+           while (true) {
                 Socket accept = server.accept();
                 communicate(accept);
-                
+                System.out.println("4");
             }
             
 
@@ -49,13 +49,20 @@ public class ServerOne extends Thread {
         try {
             InetAddress InetAddress = accept.getInetAddress();
             System.err.println(InetAddress + " get connected...\n");
+            System.out.println("2");
             inStream = new ObjectInputStream(accept.getInputStream());
+            System.out.println("2");
             Student student = (Student) inStream.readObject();
-            System.out.println("Object received = " + student.getIndexNum());
+            System.out.println("2");
+            System.out.println("Object received = " + student.getStdNam());
+            System.out.println("2");
             accept.close();
+            System.out.println("3");
         } catch (IOException ex) {
             System.err.println(ex);
+            System.out.println("12");
         } catch (ClassNotFoundException ex) {
+            System.out.println("34");
             System.err.println(ex);
         }
     }

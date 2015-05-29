@@ -14,11 +14,6 @@ import java.io.Serializable;
  * @author GWSC GINTOTA
  */
 public class Student implements Serializable {
-
-//    public Student() {
-//        MainJFrame MF = new MainJFrame();
-//        MF.setVisible(true);
-//    }
     private String stdNam;
     private int indexNum;
     private float scs_01;
@@ -27,7 +22,8 @@ public class Student implements Serializable {
     private float scs_04;
     private float scs_05;
     private float scs_06;
-    private static final long serialVersionUID = 5950169519310163575L;
+    private float gpa;
+    private float rank;
 
     /**
      * @return the stdNam
@@ -41,7 +37,7 @@ public class Student implements Serializable {
      */
     public void setStdNam(String stdNam) {
         this.stdNam = stdNam;
-
+              
     }
 
     /**
@@ -50,9 +46,8 @@ public class Student implements Serializable {
     public int getIndexNum() {
         return indexNum;
     }
-
-    public void setIndexNum(int indexNum) {
-        this.indexNum = indexNum;
+    public void setIndexNum(int indexNum ){
+        this.indexNum=indexNum;
     }
 
     /**
@@ -139,33 +134,37 @@ public class Student implements Serializable {
         this.scs_06 = scs_06;
     }
 
-    public static void writetofile(Student obj) throws IOException {
-        ObjectOutputStream objectoutputstream = new ObjectOutputStream(new FileOutputStream("details.bin"));
+ 
+    public static void writetofile(Student obj)throws IOException{
+        ObjectOutputStream objectoutputstream=new ObjectOutputStream(new FileOutputStream("details.bin"));
         objectoutputstream.writeObject(obj);
     }
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Student student = (Student) o;
-
-        if (indexNum != student.indexNum) {
-            return false;
-        }
-
-        return true;
+    /**
+     * @return the gpa
+     */
+    public float getGpa() {
+        return gpa;
     }
 
-    public int hashCode() {
-        return indexNum;
+    /**
+     * @param gpa the gpa to set
+     */
+    public void setGpa(float gpa) {
+        this.gpa = gpa;
     }
 
-    public String toString() {
-        return "Id = " + getIndexNum();
+    /**
+     * @return the rank
+     */
+    public float getRank() {
+        return rank;
+    }
+
+    /**
+     * @param rank the rank to set
+     */
+    public void setRank(float rank) {
+        this.rank = rank;
     }
 }
