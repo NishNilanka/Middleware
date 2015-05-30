@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import static java.lang.Thread.MIN_PRIORITY;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,9 +28,9 @@ public class MainServer extends Thread {
         sOne.start();
         sTwo.start();
         
-        sOne.calGPA();
+        sOne.calGPA(MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY);
         sTwo.getRank();
-        
+        System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDD"+sOne.calGPA(MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY)+2);
     }
     public void run()
     {

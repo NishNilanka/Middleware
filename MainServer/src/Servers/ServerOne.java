@@ -41,8 +41,10 @@ public class ServerOne extends Thread {
 
     }
 
-    public double calGPA() {
-        return 1.00;
+    public double calGPA(double a,double b,double c,double d,double e,double f) {
+        double gpa=(a+b+c+d+e+f)/6;
+        return gpa;
+        
     }
 
     public void communicate(Socket accept) {
@@ -52,6 +54,14 @@ public class ServerOne extends Thread {
             inStream = new ObjectInputStream(accept.getInputStream());
             Student student = (Student) inStream.readObject();
             System.out.println("Object received = " + student.getIndexNum());
+            double subject1=(int) student.getScs_01();
+            double subject2=(int) student.getScs_02();
+            double subject3=(int) student.getScs_03();
+            double subject4=(int) student.getScs_04();
+            double subject5=(int) student.getScs_05();
+            double subject6=(int) student.getScs_06();
+            double gp1=calGPA(subject1, subject2, subject3, subject4, subject5, subject6);
+            System.out.println("callllllllllllllgpaaaaaaa"+gp1);
             accept.close();
         } catch (IOException ex) {
             System.err.println(ex);

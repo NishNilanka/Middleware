@@ -4,9 +4,13 @@
  */
 package clientone;
 
+import com.sun.org.apache.bcel.internal.util.ByteSequence;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -33,12 +37,16 @@ public class ClientOne {
        
         try {
             Socket clientSocket = new Socket("127.0.0.1", 3074);
+            
             System.err.println("Clien was connected to the server ");
             
             outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            
             // Creating input and putput stream to read and write
             //Scanner to read the data from keyboard
-            
+            InputStream inFromServer = clientSocket.getInputStream();
+            DataInputStream in =new DataInputStream(inFromServer);
+            System.out.println("Serer said"+in.readUTF());
             System.err.println("Terminating the client connection.");
 
             clientSocket.close();
@@ -73,7 +81,12 @@ public class ClientOne {
                 outputStream = new ObjectOutputStream(socket.getOutputStream());
                 System.out.println("Object to be written = " + std);
                 outputStream.writeObject(std);
-
+                
+                
+                /*InputStream inFromServer = socket.getInputStream();
+                DataInputStream in =new DataInputStream(inFromServer);
+                System.out.println("Serer said"+in.readUTF());
+                System.err.println("Terminating the client connection.");*/
 
             } catch (SocketException se) {
                 JOptionPane.showMessageDialog(null, "Erro !");
