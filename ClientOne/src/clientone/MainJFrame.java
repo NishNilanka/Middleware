@@ -5,6 +5,7 @@
 package clientone;
 
 import java.util.ArrayList;
+import middleware.Student;
 
 /**
  *

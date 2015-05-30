@@ -4,13 +4,14 @@
  */
 package Servers;
 
-import clientone.Student;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import middleware.Student;
 
 /**
  *
@@ -315,12 +316,12 @@ public class ServerOne extends Thread {
         double class6=sub6*2;
     
         
-        System.out.println("Class111111===="+class1);
-        System.out.println("Class111111===="+class2);
-        System.out.println("Class111111===="+class3);
-        System.out.println("Class111111===="+class4);
-        System.out.println("Class111111===="+class5);
-        System.out.println("Class111111===="+class6);
+//        System.out.println("Class111111===="+class1);
+//        System.out.println("Class111111===="+class2);
+//        System.out.println("Class111111===="+class3);
+//        System.out.println("Class111111===="+class4);
+//        System.out.println("Class111111===="+class5);
+//        System.out.println("Class111111===="+class6);
         double gpa = (class1+class2+class3+class4+class5+class6) / 12;
         return gpa;
 
@@ -333,7 +334,8 @@ public class ServerOne extends Thread {
             inStream = new ObjectInputStream(accept.getInputStream());
             Student student = (Student) inStream.readObject();
             System.out.println("Object received = " + student.getStdNam());
-
+            
+            
             System.out.println("Object received = " + student.getIndexNum());
             String subject1 =  student.getScs_01();
             String subject2 =  student.getScs_02();
@@ -346,7 +348,7 @@ public class ServerOne extends Thread {
 
             outputStream = new ObjectOutputStream(accept.getOutputStream());
             outputStream.writeObject(gp1);
-
+            
             
         } catch (IOException ex) {
             System.err.println(ex);

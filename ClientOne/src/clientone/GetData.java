@@ -5,6 +5,7 @@
 package clientone;
 
 import java.util.ArrayList;
+import middleware.Student;
 
 /**
  *
@@ -16,7 +17,6 @@ public class GetData {
       Student s1=new Student();
       s1.setStdNam("ddadsa");
       s1.setGpa(23);
-      s1.setRank(1);
     ArrayList<Student>  Array1=new  ArrayList<Student> ();
     Array1.add(s1);
       return Array1;

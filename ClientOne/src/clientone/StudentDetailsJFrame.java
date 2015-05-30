@@ -7,6 +7,7 @@ package clientone;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JOptionPane;
+import middleware.Student;
 
 /**
  *
@@ -251,8 +252,7 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
 //              } catch (IOException ex) {
 //                  Logger.getLogger(StudentDetailsJFrame.class.getName()).log(Level.SEVERE, null, ex);
 //              }
-          ClientOne clntOne =new ClientOne();
-          clntOne.client(std);
+
           
           }
           catch(NumberFormatException e){

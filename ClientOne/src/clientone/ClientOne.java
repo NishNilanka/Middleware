@@ -4,17 +4,14 @@
  */
 package clientone;
 
-import com.sun.org.apache.bcel.internal.util.ByteSequence;
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
+import middleware.Middleware;
+import middleware.Student;
 /*import org.json.simple.JSONArray;
  import org.json.simple.JSONObject;
  import com.google.gson.Gson;*/
@@ -25,38 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class ClientOne {
 
-    private ObjectInputStream inputStream = null;
-    private ObjectOutputStream outputStream = null;
     private Student newStudent;
-    private boolean isConnected;
-    private Socket socket;
-    private ObjectInputStream inStream;
-
-    public void client(Student std) {
-
-
-
-        try {
-            Socket clientSocket = new Socket("127.0.0.1", 3074);
-
-            System.err.println("Clien was connected to the server ");
-
-            outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-
-            // Creating input and putput stream to read and write
-            //Scanner to read the data from keyboard
-            InputStream inFromServer = clientSocket.getInputStream();
-            DataInputStream in = new DataInputStream(inFromServer);
-            System.out.println("Serer said" + in.readUTF());
-            System.err.println("Terminating the client connection.");
-
-            clientSocket.close();
-        } catch (UnknownHostException ex) {
-            System.err.println("Server Not Reachable");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Server Not Reachable");
-        }
-    }
 
     /**
      * @return the newStudent
@@ -74,32 +40,10 @@ public class ClientOne {
     }
 
     public void AddStudent(Student std) throws ClassNotFoundException {
-        double gpa;
-        while (!isConnected) {
-            try {
-                socket = new Socket("localHost", 100);
-                System.out.println("Connected");
-                isConnected = true;
-                outputStream = new ObjectOutputStream(socket.getOutputStream());
-                System.out.println("Object to be written = " + std);
-                outputStream.writeObject(std);
 
-                inStream = new ObjectInputStream(socket.getInputStream());
-                gpa = (Double) inStream.readObject();
-                JOptionPane.showMessageDialog(null, "Student GPA is "+gpa, "Reply from Server - GPA", JOptionPane.INFORMATION_MESSAGE);
-                System.out.println("Object received(GPA) = " + gpa);
-                isConnected = false;
-                break;
-                /*InputStream inFromServer = socket.getInputStream();
-                 DataInputStream in =new DataInputStream(inFromServer);
-                 System.out.println("Serer said"+in.readUTF());
-                 System.err.println("Terminating the client connection.");*/
+        Middleware b = new Middleware();
+        b.clientStubAdd(std);
 
-            } catch (SocketException se) {
-                JOptionPane.showMessageDialog(null, "Erro !");
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Erro ! IOException");
-            }
-        }
+
     }
 }
