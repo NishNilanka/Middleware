@@ -28,9 +28,9 @@ public class MainServer extends Thread {
         sOne.start();
         sTwo.start();
         
-        sOne.calGPA(MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY);
+        sOne.calGPA(null, null, null, null, null, null);
         sTwo.getRank();
-        System.out.println(sOne.calGPA(MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY)+2);
+        //System.out.println(sOne.calGPA(MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY, MIN_PRIORITY)+2);
     }
     public void run()
     {

@@ -39,6 +39,10 @@ public class Table extends AbstractTableModel {
     }
 
     @Override
+    public String getColumnName(int columnIndex) {
+        return COLUMN_NAME[columnIndex];
+    }
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch(columnIndex)
         {
