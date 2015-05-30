@@ -58,6 +58,6 @@ public class ServerTwo extends Thread {
     }
 
     public void getRank() {
-        System.out.print("Hi");
+        
     }
 }

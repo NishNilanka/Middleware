@@ -4,17 +4,9 @@
  */
 package clientone;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.net.SocketException;
-import javax.swing.JOptionPane;
 import middleware.Middleware;
 import middleware.Student;
-/*import org.json.simple.JSONArray;
- import org.json.simple.JSONObject;
- import com.google.gson.Gson;*/
+
 
 /**
  *

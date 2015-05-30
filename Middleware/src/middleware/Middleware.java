@@ -10,8 +10,6 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,8 +49,19 @@ public class Middleware extends Thread {
         }
     }
 
-    void serverSkeleton(Socket client, int type) {
+    public Student serverSkeletonGet(Student student) {
+        //unmarshalling
+        String subject1 = student.getScs_01();
+        String subject2 = student.getScs_02();
+        String subject3 = student.getScs_03();
+        String subject4 = student.getScs_04();
+        String subject5 = student.getScs_05();
+        String subject6 = student.getScs_06();
         
+        
+       
+        return student;
+
     }
 
     public void clientStubAdd(Student std) {

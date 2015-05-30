@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import middleware.Middleware;
 import middleware.Student;
 
 /**
@@ -335,15 +336,18 @@ public class ServerOne extends Thread {
             Student student = (Student) inStream.readObject();
             System.out.println("Object received = " + student.getStdNam());
             
-            
+            Middleware m = new Middleware();
+            m.serverSkeletonGet(student);
+            String subject1 = student.getScs_01();
+        String subject2 = student.getScs_02();
+        String subject3 = student.getScs_03();
+        String subject4 = student.getScs_04();
+        String subject5 = student.getScs_05();
+        String subject6 = student.getScs_06();
+        
             System.out.println("Object received = " + student.getIndexNum());
-            String subject1 =  student.getScs_01();
-            String subject2 =  student.getScs_02();
-            String subject3 = student.getScs_03();
-            String subject4 = student.getScs_04();
-            String subject5 =  student.getScs_05();
-            String subject6 =  student.getScs_06();
-            double gp1 = calGPA(subject1, subject2, subject3, subject4, subject5, subject6);
+             double gp1 = calGPA(subject1, subject2, subject3, subject4, subject5, subject6);
+            
             System.out.println("GPA " + gp1);
 
             outputStream = new ObjectOutputStream(accept.getOutputStream());
