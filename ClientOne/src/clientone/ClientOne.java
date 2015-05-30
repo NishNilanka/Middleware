@@ -77,7 +77,7 @@ public class ClientOne {
         double gpa;
         while (!isConnected) {
             try {
-                socket = new Socket("localHost", 3074);
+                socket = new Socket("localHost", 100);
                 System.out.println("Connected");
                 isConnected = true;
                 outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -88,6 +88,8 @@ public class ClientOne {
                 gpa = (Double) inStream.readObject();
                 JOptionPane.showMessageDialog(null, "Student GPA is "+gpa, "Reply from Server - GPA", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Object received(GPA) = " + gpa);
+                isConnected = false;
+                break;
                 /*InputStream inFromServer = socket.getInputStream();
                  DataInputStream in =new DataInputStream(inFromServer);
                  System.out.println("Serer said"+in.readUTF());

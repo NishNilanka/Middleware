@@ -11,7 +11,6 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +30,8 @@ public class ServerOne extends Thread {
             while (true) {
                 Socket accept = server.accept();
                 communicate(accept);
+                accept.close();
+                break;
             }
 
 
@@ -67,7 +68,7 @@ public class ServerOne extends Thread {
             outputStream = new ObjectOutputStream(accept.getOutputStream());
             outputStream.writeObject(gp1);
 
-            accept.close();
+            
         } catch (IOException ex) {
             System.err.println(ex);
         } catch (ClassNotFoundException ex) {

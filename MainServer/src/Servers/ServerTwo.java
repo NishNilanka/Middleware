@@ -4,10 +4,12 @@
  */
 package Servers;
 
+import clientone.Student;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -20,40 +22,42 @@ import java.net.Socket;
 public class ServerTwo extends Thread {
     private ObjectInputStream inStream = null;
     int port = 3075;
+    private ObjectOutputStream outputStream;
+
     @Override
-    public void run()
-    {
-         try {
+    public void run() {
+        try {
             ServerSocket server = new ServerSocket(port);
-            System.err.println("Server Two is listening to port : "+ port);
-            Socket accept = server.accept();
-            inStream = new ObjectInputStream(accept.getInputStream());
-            InetAddress InetAddress = accept.getInetAddress();
-            System.err.println(InetAddress + " get connected...");
-            BufferedReader bf = new BufferedReader(new InputStreamReader(accept.getInputStream()));
-            PrintWriter print = new PrintWriter(accept.getOutputStream(), true);
-            String Str;
+            System.err.println("Server One is listening to port : " + port);
             while (true) {
-
-                Str = bf.readLine();
-                System.out.println("Client - " + InetAddress + " : " + Str);
-
-                if (Str.equals("Bye")) {
-                    break;
-                }
-
-
-                print.println(Str);
+                Socket accept = server.accept();
+                communicate(accept);
             }
-            System.err.println("Connection terminated");
-            print.close();
-            bf.close();
-            accept.close();
+
 
         } catch (IOException ex) {
             System.err.println(ex);
         }
-}
+
+    }
+
+
+
+    public void communicate(Socket accept) {
+        try {
+            InetAddress InetAddress = accept.getInetAddress();
+            System.err.println(InetAddress + " get connected...\n");
+            inStream = new ObjectInputStream(accept.getInputStream());
+            Student student = (Student) inStream.readObject();
+            
+
+            accept.close();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        } catch (ClassNotFoundException ex) {
+            System.err.println(ex);
+        }
+    }
 
     public void getRank() {
         System.out.print("Hi");
