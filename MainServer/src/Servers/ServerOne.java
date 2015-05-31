@@ -315,7 +315,11 @@ public class ServerOne extends Thread {
     
         
         System.out.println("Class111111===="+class1);
-        
+        System.out.println("Class111111===="+class2);
+        System.out.println("Class111111===="+class3);
+        System.out.println("Class111111===="+class4);
+        System.out.println("Class111111===="+class5);
+        System.out.println("Class111111===="+class6);
         double gpa = (class1+class2+class3+class4+class5+class6) / 12;
         return gpa;
 
