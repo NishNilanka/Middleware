@@ -4,6 +4,7 @@
  */
 package clientone;
 
+import java.awt.Toolkit;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JOptionPane;
@@ -58,11 +59,22 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Enter Name");
 
+        txtIndexNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIndexNumKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Index Number");
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
+            }
+        });
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameKeyTyped(evt);
             }
         });
 
@@ -121,7 +133,6 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
                                 .addGap(76, 76, 76)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -266,6 +277,27 @@ public class StudentDetailsJFrame extends javax.swing.JFrame {
           
       }
     }//GEN-LAST:event_submitbtnActionPerformed
+
+    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
+         char c=evt.getKeyChar();
+        String in = txtName.getText();
+        if(c!=' '){
+        if(!Character.isLetter(c)|| Character.isDigit(c)){
+           evt.consume();
+           Toolkit tk = Toolkit.getDefaultToolkit();
+             tk.beep();}}
+    }//GEN-LAST:event_txtNameKeyTyped
+
+    private void txtIndexNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIndexNumKeyTyped
+        // TODO add your handling code here:
+              char c=evt.getKeyChar();
+        String in =txtIndexNum.getText();
+        if(!Character.isDigit(c)){
+        evt.consume();
+           Toolkit tk = Toolkit.getDefaultToolkit();
+             tk.beep();
+    }
+    }//GEN-LAST:event_txtIndexNumKeyTyped
 
 //   public static void writetofile(Student obj)throws IOException{
 //        ObjectOutputStream objectoutputstream=new ObjectOutputStream(new FileOutputStream("details.bin"));
