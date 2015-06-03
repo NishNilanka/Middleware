@@ -347,11 +347,11 @@ public class ServerOne extends Thread {
         
             System.out.println("Object received = " + student.getIndexNum());
              double gp1 = calGPA(subject1, subject2, subject3, subject4, subject5, subject6);
-            
+            student.setGpa(gp1);
             System.out.println("GPA " + gp1);
 
             outputStream = new ObjectOutputStream(accept.getOutputStream());
-            outputStream.writeObject(gp1);
+            outputStream.writeObject(student);
             
             
         } catch (IOException ex) {

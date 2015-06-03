@@ -4,6 +4,8 @@
  */
 package clientone;
 
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import middleware.Middleware;
 import middleware.Student;
 
@@ -26,16 +28,21 @@ public class ClientOne {
     /**
      * @param newStudent the newStudent to set
      */
-    public void setNewStudent(Student newStudent) throws ClassNotFoundException {
+    public void setNewStudent(Student newStudent) throws ClassNotFoundException, IOException {
         this.newStudent = newStudent;
         AddStudent(newStudent);
     }
 
-    public void AddStudent(Student std) throws ClassNotFoundException {
+    public void AddStudent(Student std) throws ClassNotFoundException, IOException {
 
         Middleware b = new Middleware();
         b.clientStubAdd(std);
 
 
+    }
+    
+    public void showGPA(Student std)
+    {
+        JOptionPane.showMessageDialog(null, "Student GPA is " + std.getGpa(), "Reply from Server - GPA", JOptionPane.INFORMATION_MESSAGE);
     }
 }

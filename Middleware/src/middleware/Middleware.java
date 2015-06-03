@@ -64,7 +64,7 @@ public class Middleware extends Thread {
 
     }
 
-    public void clientStubAdd(Student std) {
+    public void clientStubAdd(Student std) throws IOException {
         try {
             socket = new Socket("localHost", 3074);//Middleware decides the port
             System.out.println("Connected");
@@ -74,18 +74,26 @@ public class Middleware extends Thread {
             outputStream.writeObject(std);
 
             inStream = new ObjectInputStream(socket.getInputStream());
-            gpa = (Double) inStream.readObject();
-            JOptionPane.showMessageDialog(null, "Student GPA is " + gpa, "Reply from Server - GPA", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Object received(GPA) = " + gpa);
+            System.err.println("Fuck123");
+            Student student = (Student) inStream.readObject();
+            System.err.println("hukapan");
+            JOptionPane.showMessageDialog(null, "Student GPA is " + student.getGpa(), "Reply from Server - GPA", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Object received(with GPA) = " + student);
             isConnected = false;
-            outputStream.close();
-            inStream.close();
+            
         } catch (UnknownHostException ex) {
             JOptionPane.showMessageDialog(null, "Error ! unkonow Host");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error ! IOException");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Error !");
+        }
+        finally
+        {
+            outputStream.close();
+            inStream.close();
+            socket.close();
+            
         }
     }
 }
