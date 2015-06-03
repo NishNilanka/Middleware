@@ -74,9 +74,7 @@ public class Middleware extends Thread {
             outputStream.writeObject(std);
 
             inStream = new ObjectInputStream(socket.getInputStream());
-            System.err.println("Fuck123");
             Student student = (Student) inStream.readObject();
-            System.err.println("hukapan");
             JOptionPane.showMessageDialog(null, "Student GPA is " + student.getGpa(), "Reply from Server - GPA", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Object received(with GPA) = " + student);
             isConnected = false;
